@@ -2,3 +2,7 @@ node_modules/
 dist/
 .DS_Store
 *.log
+
+# Bepory is licensed for personal use only and may not be re-uploaded.
+# Keep your local copy here; it is never committed.
+public/fonts/

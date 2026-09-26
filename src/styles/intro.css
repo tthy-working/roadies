@@ -1,0 +1,37 @@
+.intro {
+  display: grid;
+  place-items: center;
+  container-type: size;
+}
+
+/* The 440×956 Figma frame, scaled to fit the screen without cropping. */
+.intro-stage {
+  position: relative;
+  width: min(100cqw, 100cqh * 440 / 956);
+  aspect-ratio: 440 / 956;
+}
+
+.intro-stage svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#ro,
+#adies {
+  fill: var(--orange);
+}
+
+/* The masks hide parts of the "R", so they must match the background exactly. */
+#masks path {
+  fill: var(--cream);
+}
+
+.bubble ellipse,
+.bubble path {
+  fill: var(--bubble);
+}
+
+.bubble .bubble-text {
+  fill: #000;
+}

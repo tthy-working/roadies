@@ -1,0 +1,304 @@
+.home {
+  gap: 24px;
+  overflow-y: auto;
+  padding: max(22px, env(safe-area-inset-top)) 20px max(24px, env(safe-area-inset-bottom));
+}
+
+.home-top {
+  display: flex;
+  align-items: center;
+  padding: 2px 4px 0;
+}
+
+.wordmark {
+  display: block;
+  height: 30px;
+  width: auto;
+  fill: var(--orange);
+}
+
+/* ---- Your jam ---- */
+
+.jam-card {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  padding: 22px 22px 24px;
+  border-radius: 28px;
+  background: var(--teal);
+  color: var(--cream);
+}
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.jam-road {
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-size: clamp(40px, 12vw, 52px);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.jam-near {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+.jam-drivers {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgb(255 252 238 / 0.14);
+  font-size: 13px;
+}
+
+.jam-drivers strong {
+  font-weight: 700;
+}
+
+/* The two intro cars, bumper to bumper on a little cream road in the corner.
+   (The teal car would vanish against the teal card without it.) */
+.jam-cars {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--cream);
+  pointer-events: none;
+}
+
+/* The car PNGs have wide transparent margins; negative margins trim them. */
+.jam-cars img {
+  width: 80px;
+  height: 45px;
+  margin-inline: -17px;
+}
+
+.jam-cars img + img {
+  margin-left: -26px;
+}
+
+/* Loading state */
+
+.skeleton {
+  border-radius: 8px;
+  background: rgb(255 252 238 / 0.18);
+  animation: skeleton-pulse 1.1s ease-in-out infinite alternate;
+}
+
+.skeleton-title {
+  width: 60%;
+  height: 46px;
+  margin-top: 12px;
+}
+
+.skeleton-line {
+  width: 45%;
+  height: 14px;
+  margin-top: 14px;
+}
+
+.skeleton-chips {
+  width: 85%;
+  height: 30px;
+  margin-top: 22px;
+  border-radius: 999px;
+}
+
+@keyframes skeleton-pulse {
+  from {
+    opacity: 0.55;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---- Voice commands ---- */
+
+.voice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 6px;
+}
+
+/* The mic "orb": teal with ripples while listening, orange once a room is being
+   found, ink (and tappable to retry) when voice isn't available. */
+.orb {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 104px;
+  height: 104px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--teal);
+  color: var(--cream);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.orb:disabled {
+  cursor: default;
+}
+
+.orb:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 4px;
+}
+
+.orb::before,
+.orb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--teal);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+[data-state="listening"] .orb::before {
+  animation: orb-ripple 2s ease-out infinite;
+}
+
+[data-state="listening"] .orb::after {
+  animation: orb-ripple 2s ease-out 1s infinite;
+}
+
+@keyframes orb-ripple {
+  from {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  to {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+[data-state="connecting"] .orb {
+  background: var(--orange);
+}
+
+[data-state="blocked"] .orb,
+[data-state="unavailable"] .orb {
+  background: var(--ink);
+}
+
+.voice-status {
+  margin-top: 20px;
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1.15;
+}
+
+.voice-heard {
+  min-height: 20px;
+  margin-top: 6px;
+  max-width: 100%;
+  font-size: 14px;
+  color: var(--ink-soft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+[data-state="blocked"] .voice-heard,
+[data-state="unavailable"] .voice-heard {
+  white-space: normal;
+}
+
+.say-label {
+  margin-top: 18px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.commands {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.command {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 16px 20px;
+  border: 2px solid transparent;
+  border-radius: 22px;
+  background: var(--card);
+  box-shadow: var(--shadow-card);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+}
+
+.command:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 3px;
+}
+
+.command-word {
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 1.1;
+  color: var(--orange);
+}
+
+.command-desc {
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.command.is-chosen {
+  border-color: var(--orange);
+  background: var(--orange-tint);
+}
+
+.command:disabled {
+  cursor: default;
+}
+
+.command:disabled:not(.is-chosen) {
+  opacity: 0.45;
+}
+
+.safety {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: var(--teal-tint);
+  color: var(--teal);
+  font-size: 13px;
+  font-weight: 500;
+}

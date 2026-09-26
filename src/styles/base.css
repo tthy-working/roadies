@@ -1,0 +1,243 @@
+/* Bepory is personal-use licensed, so it's never committed. It loads from the
+   installed font, or from public/fonts/Bepory.otf if you keep a local copy there. */
+@font-face {
+  font-family: "Bepory";
+  src: local("Bepory"), local("Bepory Regular"), url("/fonts/Bepory.otf") format("opentype");
+  font-display: swap;
+}
+
+:root {
+  /* Brand */
+  --orange: #f4682c;
+  --teal: #137584;
+  --cream: #fffcee;
+  --ink: #2a1f1f;
+
+  /* Derived */
+  --ink-soft: rgb(42 31 31 / 0.66);
+  --card: #ffffff;
+  --orange-tint: #fde6d6;
+  --teal-tint: #dcece9;
+  --bubble: #b7e8f0; /* speech bubbles in the intro */
+
+  --font-display: "Bepory", "Roboto", system-ui, sans-serif;
+  --font-body: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --shadow-card: 0 1px 2px rgb(42 31 31 / 0.06), 0 8px 24px rgb(42 31 31 / 0.07);
+
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+  background: var(--ink);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+svg {
+  flex-shrink: 0;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Full screen on phones; a phone-sized frame on bigger screens. */
+.phone {
+  position: relative;
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--cream);
+  isolation: isolate;
+}
+
+@media (min-width: 520px) and (min-height: 640px) {
+  .phone {
+    width: 440px;
+    height: min(956px, calc(100dvh - 48px));
+    border-radius: 44px;
+    box-shadow: 0 0 0 10px #1a1313, 0 30px 80px rgb(0 0 0 / 0.5);
+  }
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--cream);
+}
+
+/* Scroll like an app: no desktop scrollbars. */
+.screen,
+.screen * {
+  scrollbar-width: none;
+}
+
+/* ---- Buttons ---- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: var(--orange);
+  color: var(--cream);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+}
+
+.btn:focus-visible,
+.ctl:focus-visible,
+.link-btn:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 3px;
+}
+
+/* ---- Bits shared by several screens ---- */
+
+.live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--orange);
+  animation: live-pulse 1.6s ease-out infinite;
+}
+
+@keyframes live-pulse {
+  from {
+    box-shadow: 0 0 0 0 rgb(244 104 44 / 0.5);
+  }
+  to {
+    box-shadow: 0 0 0 8px rgb(244 104 44 / 0);
+  }
+}
+
+.avatar {
+  position: relative;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-weight: 700;
+  color: var(--cream);
+  background: var(--teal);
+}
+
+.tone-orange {
+  background: var(--orange);
+}
+
+.tone-teal {
+  background: var(--teal);
+}
+
+.tone-ink {
+  background: var(--ink);
+}
+
+.tone-sand {
+  background: var(--orange-tint);
+  color: var(--ink);
+}
+
+.toast {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  left: 50%;
+  translate: -50% 0;
+  z-index: 10;
+  max-width: calc(100% - 32px);
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-dot,
+  .skeleton,
+  .is-speaking .avatar,
+  .orb::before,
+  .orb::after {
+    animation: none !important;
+  }
+}

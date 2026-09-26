@@ -1,0 +1,212 @@
+.room {
+  padding-top: max(22px, env(safe-area-inset-top));
+}
+
+.room-top {
+  padding: 2px 24px 0;
+}
+
+.room-tags {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.road-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--teal-tint);
+  color: var(--teal);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.room-title {
+  margin-top: 12px;
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.room-sub {
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.room-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 20px 0;
+  padding: 12px 12px 12px 14px;
+  border-radius: 16px;
+  background: var(--orange-tint);
+  font-size: 14px;
+}
+
+.room-banner > svg {
+  color: var(--orange);
+}
+
+.link-btn {
+  margin-left: auto;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--teal);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.room-hint {
+  margin: 14px 24px 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+/* ---- People ---- */
+
+.people {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-content: start;
+  gap: 22px 8px;
+  overflow-y: auto;
+  padding: 24px 20px 28px;
+}
+
+.person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  text-align: center;
+}
+
+.person .avatar {
+  width: 76px;
+  height: 76px;
+  font-size: 26px;
+}
+
+.person-name,
+.person-detail {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.person-name {
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.person-detail {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.is-speaking .avatar {
+  box-shadow: 0 0 0 3px var(--cream), 0 0 0 6px var(--teal);
+  animation: talking 1s ease-in-out infinite;
+}
+
+@keyframes talking {
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px var(--cream), 0 0 0 6px var(--teal), 0 0 0 6px rgb(19 117 132 / 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 3px var(--cream), 0 0 0 6px var(--teal), 0 0 0 14px rgb(19 117 132 / 0);
+  }
+}
+
+.muted-badge {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  display: none;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--cream);
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.is-muted .muted-badge {
+  display: grid;
+}
+
+.connecting {
+  grid-column: 1 / -1;
+  padding-top: 48px;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+/* ---- Controls ---- */
+
+.controls {
+  display: flex;
+  justify-content: space-around;
+  padding: 18px 12px max(22px, env(safe-area-inset-bottom));
+  border-radius: 28px 28px 0 0;
+  background: var(--ink);
+}
+
+.ctl {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 88px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--cream);
+  cursor: pointer;
+}
+
+.ctl-icon {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: rgb(255 252 238 / 0.12);
+  transition: background 0.15s ease, transform 0.12s ease;
+}
+
+.ctl[aria-pressed="true"] .ctl-icon {
+  background: var(--teal);
+}
+
+.ctl-leave .ctl-icon {
+  background: var(--orange);
+}
+
+.ctl:active:not(:disabled) .ctl-icon {
+  transform: scale(0.94);
+}
+
+.ctl:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.ctl-label {
+  font-size: 13px;
+  font-weight: 500;
+}
