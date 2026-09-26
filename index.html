@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Roadies splash animation, recreated from the Figma storyboard." />
+    <title>Roadies Splash</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F4682C'/%3E%3Ctext x='32' y='46' font-family='system-ui,sans-serif' font-size='40' font-weight='700' text-anchor='middle' fill='%23fff'%3ER%3C/text%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <main class="app">
+      <div class="stage">
+        <svg viewBox="0 0 440 956" role="img" aria-label="Roadies splash: two cars draw the R of the Roadies logo, chat, then settle into the wordmark">
+          <rect width="440" height="956" fill="#fff" />
+          <!-- Layer order matches the Figma frames: text, Rectangle 6, Rectangle 5, "3 1", "2 1". -->
+          <g id="world">
+            <g id="wordmark">
+              <path id="ro" />
+              <path id="adies" />
+            </g>
+            <g id="masks">
+              <path id="mask6" />
+              <path id="mask5" />
+            </g>
+            <g id="cars">
+              <image id="car-red" preserveAspectRatio="xMidYMid slice" />
+              <image id="car-teal" preserveAspectRatio="xMidYMid slice" />
+            </g>
+          </g>
+          <g id="bubbles"></g>
+        </svg>
+      </div>
+
+      <div class="controls">
+        <div class="timeline">
+          <input id="scrub" type="range" min="0" max="1000" value="0" aria-label="Animation timeline" />
+          <output id="frame" aria-live="off">Frame 2</output>
+        </div>
+        <div class="buttons">
+          <div class="group">
+            <button id="prev" class="btn" type="button" aria-label="Previous frame">&larr;</button>
+            <button id="play" class="btn primary" type="button" aria-pressed="false">Play</button>
+            <button id="next" class="btn" type="button" aria-label="Next frame">&rarr;</button>
+            <button id="replay" class="btn" type="button">Replay</button>
+          </div>
+          <div class="group" role="group" aria-label="Speed">
+            <button class="btn seg" type="button" data-speed="1" aria-pressed="true">1&times;</button>
+            <button class="btn seg" type="button" data-speed="0.5" aria-pressed="false">0.5&times;</button>
+            <button class="btn seg" type="button" data-speed="0.25" aria-pressed="false">0.25&times;</button>
+          </div>
+          <label class="loop"><input id="loop" type="checkbox" checked /> Loop</label>
+        </div>
+        <p class="hint">Space to play/pause &middot; &larr; &rarr; step through Figma frames &middot; R to replay</p>
+      </div>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
