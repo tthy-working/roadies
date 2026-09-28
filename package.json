@@ -2,7 +2,13 @@
   "name": "roadies",
   "private": true,
   "version": "0.1.0",
-  "description": "Roadies splash animation, recreated from the Figma storyboard.",
+  "description": "Brand, animated logo intro, and frontend prototype for Roadies: hands-free voice chat for drivers stuck in the same traffic jam.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tthy-working/roadies.git"
+  },
+  "homepage": "https://github.com/tthy-working/roadies#readme",
   "type": "module",
   "scripts": {
     "dev": "vite",
